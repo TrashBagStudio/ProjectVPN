@@ -33,7 +33,6 @@
       position: relative;
     }
 
-    /* Боковое свечение */
     body::after {
       content: "";
       position: fixed;
@@ -45,7 +44,6 @@
         radial-gradient(circle at right center, rgba(72,128,255,0.12), transparent 30%);
     }
 
-    /* Темнее и меньше сетка */
     body::before {
       content: "";
       position: fixed;
@@ -79,8 +77,38 @@
       z-index: 2;
     }
 
+    /* HEADER FULL WIDTH */
+
+    .header-wrap {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      width: 100%;
+
+      background: rgba(6, 8, 14, 0.88);
+
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+
+      transition:
+        background .25s ease,
+        border .25s ease,
+        box-shadow .25s ease;
+    }
+
+    .header-wrap.scrolled {
+      background: rgba(4, 6, 10, 0.94);
+
+      box-shadow:
+        0 10px 40px rgba(0,0,0,0.42),
+        inset 0 1px 0 rgba(255,255,255,0.03);
+    }
+
     header {
       height: 92px;
+
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -96,7 +124,6 @@
       font-weight: 800;
     }
 
-    /* Новый логотип */
     .logo-icon {
       width: 50px;
       height: 50px;
@@ -263,7 +290,6 @@
       overflow: hidden;
     }
 
-    /* Свечение внутри карточек */
     .stat-card::before,
     .feature-card::before,
     .pricing-card::before {
@@ -312,12 +338,13 @@
     }
 
     .feature-card {
-      min-height: 360px;
+      min-height: 420px;
       padding: 42px;
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 28px;
+      overflow: hidden;
     }
 
     .feature-content {
@@ -352,19 +379,23 @@
       font-weight: 600;
     }
 
-    /* Исправление картинок */
     .feature-image {
-      width: 300px;
-      max-width: 100%;
-      max-height: 260px;
+      width: 360px;
+      max-width: 48%;
+      height: auto;
       object-fit: contain;
+
       user-select: none;
       pointer-events: none;
+
       position: relative;
       z-index: 2;
+
+      transform: translateX(20px);
+
       filter:
-        drop-shadow(0 0 25px rgba(72,128,255,0.25))
-        drop-shadow(0 0 60px rgba(72,128,255,0.12));
+        drop-shadow(0 0 25px rgba(72,128,255,0.18))
+        drop-shadow(0 0 60px rgba(72,128,255,0.10));
     }
 
     .pricing-card {
@@ -399,11 +430,27 @@
       z-index: 2;
     }
 
-    /* Черный футер без линии */
+    /* FOOTER FULL WIDTH */
+
     footer {
       margin-top: 90px;
-      background: #040404;
-      padding: 70px 0;
+
+      width: 100%;
+
+      background:
+        linear-gradient(
+          180deg,
+          rgba(5,7,12,0.96),
+          rgba(3,4,8,0.98)
+        );
+
+      border-top: 1px solid rgba(255,255,255,0.05);
+
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+
+      padding: 80px 0;
+
       position: relative;
       overflow: hidden;
     }
@@ -411,12 +458,9 @@
     footer::before {
       content: "";
       position: absolute;
-      width: 600px;
-      height: 300px;
-      background: radial-gradient(circle, rgba(72,128,255,0.08), transparent 70%);
-      top: -120px;
-      left: 50%;
-      transform: translateX(-50%);
+      inset: 0;
+      background:
+        radial-gradient(circle at top center, rgba(72,128,255,0.10), transparent 45%);
       pointer-events: none;
     }
 
@@ -564,7 +608,9 @@
       }
 
       .feature-image {
-        width: 240px;
+        width: 320px;
+        max-width: 100%;
+        transform: none;
       }
 
       .pricing-title {
@@ -573,6 +619,11 @@
     }
 
     @media (max-width: 640px) {
+
+      header {
+        height: 78px;
+      }
+
       .hero {
         padding-top: 20px;
       }
@@ -600,8 +651,24 @@
         padding: 28px;
       }
 
+      .feature-card {
+        min-height: auto;
+        padding: 32px 24px 10px;
+        align-items: flex-start;
+      }
+
       .feature-title {
         font-size: 34px;
+      }
+
+      .feature-image {
+        width: 100%;
+        max-width: 340px;
+
+        transform: none;
+
+        margin-top: 10px;
+        margin-bottom: -10px;
       }
 
       .pricing-title {
@@ -611,10 +678,15 @@
       .header-actions .btn {
         width: auto;
         padding: 0 22px;
+        height: 48px;
       }
 
       .logo {
         font-size: 20px;
+      }
+
+      footer {
+        padding: 60px 0;
       }
     }
   </style>
@@ -623,34 +695,229 @@
 
   <div class="cursor-glow"></div>
 
-  <div class="container">
+  <!-- FULL WIDTH HEADER -->
+  <div class="header-wrap">
 
-    <header>
-      <a href="#" class="logo">
+    <div class="container">
 
-        <!-- НОВЫЙ ЛОГО -->
-        <div class="logo-icon">
-          <img src="https://raw.githubusercontent.com/TrashBagStudio/ProjectVPN/refs/heads/main/Untitled%20(100).png" alt="Logo">
+      <header>
+        <a href="#" class="logo">
+
+          <div class="logo-icon">
+            <img src="https://raw.githubusercontent.com/TrashBagStudio/ProjectVPN/refs/heads/main/Untitled%20(100).png" alt="Logo">
+          </div>
+
+          VPSel.ru
+        </a>
+
+        <nav>
+          <a href="#configurator">Конфигуратор</a>
+          <a href="#about" class="active">О нас</a>
+          <a href="#proxy">MTProxy</a>
+          <a href="#contacts">Контакты</a>
+        </nav>
+
+        <div class="header-actions">
+          <a href="#connect" class="btn btn-primary">Подключить</a>
         </div>
+      </header>
 
-        VPSel.ru
-      </a>
-
-      <nav>
-        <a href="#configurator">Конфигуратор</a>
-        <a href="#about" class="active">О нас</a>
-        <a href="#proxy">MTProxy</a>
-        <a href="#contacts">Контакты</a>
-      </nav>
-
-      <div class="header-actions">
-        <a href="#connect" class="btn btn-primary">Подключить</a>
-      </div>
-    </header>
-
-    <body> <div class="cursor-glow"></div> <aside class="steps-panel"> <div class="steps-title">Запуск за 3 шага</div> <div class="step"> <div class="step-number">1</div> <div class="step-content"> <h5>Выберите конфигурацию</h5> <p>Страны, скорость, характеристики и другое.</p> </div> </div> <div class="step"> <div class="step-number">2</div> <div class="step-content"> <h5>Свяжитесь с менеджером</h5> <p>Передайте информацию для оплаты и активации.</p> </div> </div> <div class="step"> <div class="step-number">3</div> <div class="step-content"> <h5>Ваш VPN готов</h5> <p>Начинайте использовать и развивать сервис.</p> </div> </div> </aside> <div class="container">  <section class="hero" id="about"> <div class="badge">Premium turnkey VPN</div> <h1> VPN, который работает <br> <span>на вас</span> </h1> <p class="hero-text"> Ваш собственный VPN сервис под ключ, с мощными и быстрыми серверами. Разверните свой VPN сервис — без переплат и скрытых лимитов. </p> <div class="hero-buttons"> <a href="#start" class="btn btn-primary">Начать сейчас</a> <a href="#login" class="btn btn-dark">Войти</a> </div> <div class="stats"> <div class="stat-card"> <div class="stat-number">163+</div> <div class="stat-label">локаций</div> </div> <div class="stat-card"> <div class="stat-number">99.5%</div> <div class="stat-label">довольных покупателей</div> </div> <div class="stat-card"> <div class="stat-number">30 189+</div> <div class="stat-label">клиентов</div> </div> </div> </section> <div class="badge section-badge">Premium turnkey VPN</div> <section class="features"> <div class="feature-card"> <div class="feature-content"> <div class="feature-tag">Удобство</div> <div class="feature-title">Проверенные хостеры</div> <div class="feature-desc"> Ваш собственный VPN сервис под ключ, с мощными и быстрыми серверами. Разверните свой VPN сервис — без переплат и скрытых лимитов. </div> </div> <img class="feature-image" src="https://qwins.co/_ipx/w_442&f_webp&q_80/card1.webp" alt="Кубик"> </div> <div class="feature-card"> <div class="feature-content"> <div class="feature-tag">Мощность</div> <div class="feature-title">Высокая производительность</div> <div class="feature-desc"> Ваш собственный VPN сервис под ключ, с мощными и быстрыми серверами. Разверните свой VPN сервис — без переплат и скрытых лимитов. </div> </div> <img class="feature-image" src="https://qwins.co/_ipx/w_572&q_80/card3.webp" alt="Ракета"> </div> </section> <section class="pricing-card" id="configurator"> <div class="feature-tag">Стоимость</div> <div class="pricing-title"> Удобный конфигуратор для <br> подбора тарифа </div> <p class="pricing-desc"> Ваш собственный VPN сервис под ключ, с мощными и быстрыми серверами. Разверните свой VPN сервис — без переплат и скрытых лимитов. </p> <a href="#pricing" class="btn btn-primary">Перейти к тарифам</a> </section> <footer id="contacts"> <div class="footer-grid"> <div class="footer-logo"> <a href="#" class="logo"> <div class="logo-icon">✦</div> VPSel.ru </a> <p>Все права защищены.</p> </div> <div class="footer-col"> <h4>Основное</h4> <a href="#about">О нас</a> <a href="#configurator">Конфигуратор</a> <a href="#hosting">Хостеры</a> </div> <div class="footer-col"> <h4>Документы</h4> <a href="#privacy">Политика конфиденциальности</a> <a href="#agreement">Пользовательское соглашение</a> <a href="#terms">Условия обслуживания</a> </div> <div class="footer-col"> <h4>Ссылки</h4> <a href="#telegram">Telegram</a> <a href="#support">Поддержка</a> <a href="#bot">Telegram бот</a> </div> </div> </footer> 
+    </div>
 
   </div>
+
+  <div class="container">
+
+    <aside class="steps-panel">
+      <div class="steps-title">Запуск за 3 шага</div>
+
+      <div class="step">
+        <div class="step-number">1</div>
+        <div class="step-content">
+          <h5>Выберите конфигурацию</h5>
+          <p>Страны, скорость, характеристики и другое.</p>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-number">2</div>
+        <div class="step-content">
+          <h5>Свяжитесь с менеджером</h5>
+          <p>Передайте информацию для оплаты и активации.</p>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-number">3</div>
+        <div class="step-content">
+          <h5>Ваш VPN готов</h5>
+          <p>Начинайте использовать и развивать сервис.</p>
+        </div>
+      </div>
+    </aside>
+
+    <section class="hero" id="about">
+      <div class="badge">Premium turnkey VPN</div>
+
+      <h1>
+        VPN, который работает <br>
+        <span>на вас</span>
+      </h1>
+
+      <p class="hero-text">
+        Ваш собственный VPN сервис под ключ, с мощными и быстрыми серверами.
+        Разверните свой VPN сервис — без переплат и скрытых лимитов.
+      </p>
+
+      <div class="hero-buttons">
+        <a href="#start" class="btn btn-primary">Начать сейчас</a>
+        <a href="/login.html" class="btn btn-dark">Войти</a>
+      </div>
+
+      <div class="stats">
+        <div class="stat-card">
+          <div class="stat-number">163+</div>
+          <div class="stat-label">локаций</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-number">99.5%</div>
+          <div class="stat-label">довольных покупателей</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-number">30 189+</div>
+          <div class="stat-label">клиентов</div>
+        </div>
+      </div>
+    </section>
+
+    <div class="badge section-badge">Premium turnkey VPN</div>
+
+    <section class="features">
+
+      <div class="feature-card">
+        <div class="feature-content">
+          <div class="feature-tag">Удобство</div>
+
+          <div class="feature-title">
+            Проверенные хостеры
+          </div>
+
+          <div class="feature-desc">
+            Ваш собственный VPN сервис под ключ,
+            с мощными и быстрыми серверами.
+            Разверните свой VPN сервис —
+            без переплат и скрытых лимитов.
+          </div>
+        </div>
+
+        <img
+          class="feature-image"
+          src="https://qwins.co/_ipx/w_442&f_webp&q_80/card1.webp"
+          alt="Кубик"
+        >
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-content">
+          <div class="feature-tag">Мощность</div>
+
+          <div class="feature-title">
+            Высокая производительность
+          </div>
+
+          <div class="feature-desc">
+            Ваш собственный VPN сервис под ключ,
+            с мощными и быстрыми серверами.
+            Разверните свой VPN сервис —
+            без переплат и скрытых лимитов.
+          </div>
+        </div>
+
+        <img
+          class="feature-image"
+          src="https://qwins.co/_ipx/w_572&q_80/card3.webp"
+          alt="Ракета"
+        >
+      </div>
+
+    </section>
+
+    <section class="pricing-card" id="configurator">
+
+      <div class="feature-tag">Стоимость</div>
+
+      <div class="pricing-title">
+        Удобный конфигуратор для <br>
+        подбора тарифа
+      </div>
+
+      <p class="pricing-desc">
+        Ваш собственный VPN сервис под ключ,
+        с мощными и быстрыми серверами.
+        Разверните свой VPN сервис —
+        без переплат и скрытых лимитов.
+      </p>
+
+      <a href="#pricing" class="btn btn-primary">
+        Перейти к тарифам
+      </a>
+
+    </section>
+
+  </div>
+
+  <!-- FULL WIDTH FOOTER -->
+  <footer id="contacts">
+
+    <div class="container">
+
+      <div class="footer-grid">
+
+        <div class="footer-logo">
+
+          <a href="#" class="logo">
+
+            <div class="logo-icon">
+              <img src="https://raw.githubusercontent.com/TrashBagStudio/ProjectVPN/refs/heads/main/Untitled%20(100).png" alt="">
+            </div>
+
+            VPSel.ru
+          </a>
+
+          <p>Все права защищены.</p>
+        </div>
+
+        <div class="footer-col">
+          <h4>Основное</h4>
+
+          <a href="#about">О нас</a>
+          <a href="#configurator">Конфигуратор</a>
+          <a href="#hosting">Хостеры</a>
+        </div>
+
+        <div class="footer-col">
+          <h4>Документы</h4>
+
+          <a href="#privacy">Политика конфиденциальности</a>
+          <a href="#agreement">Пользовательское соглашение</a>
+          <a href="#terms">Условия обслуживания</a>
+        </div>
+
+        <div class="footer-col">
+          <h4>Ссылки</h4>
+
+          <a href="#telegram">Telegram</a>
+          <a href="#support">Поддержка</a>
+          <a href="#bot">Telegram бот</a>
+        </div>
+
+      </div>
+
+    </div>
+
+  </footer>
 
   <script>
     const glow = document.querySelector('.cursor-glow');
@@ -659,6 +926,17 @@
       glow.style.left = e.clientX + 'px';
       glow.style.top = e.clientY + 'px';
     });
+
+    const headerWrap = document.querySelector('.header-wrap');
+
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 10) {
+        headerWrap.classList.add('scrolled');
+      } else {
+        headerWrap.classList.remove('scrolled');
+      }
+    });
   </script>
+
 </body>
 </html>
